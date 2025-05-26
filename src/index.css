@@ -1,0 +1,274 @@
+#root {
+    --background-alt: #1a242f;
+    margin: 0 auto;
+    padding: 2rem 0.5rem;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    padding-top: 60px;
+    max-width: none;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+footer {
+    margin-top: 6rem;
+    width: 100%;
+}
+
+footer div {
+    margin: auto;
+}
+
+footer ul {
+    padding: 0;
+    list-style: none;
+}
+
+.custom-domain {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.custom-domain span {
+    padding: 8px 0;
+}
+
+.custom-domain input {
+    margin-left: 5px;
+    width: 220px;
+}
+
+.filters {
+    display: inline-flex;
+    gap: 5px;
+    height: 40px;
+    padding: 5px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(15px);
+    background-color: transparent;
+    width: 100%;
+    justify-content: center;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+}
+
+.filter-dropdown-group {
+    display: inline-flex;
+    height: 40px;
+}
+
+.filters select {
+    margin: 0;
+}
+
+.filters h3 {
+    margin: 0;
+    padding: 8px;
+}
+
+.selected-groups {
+    display: flex;
+    flex-direction: row;
+    margin-left: 5px;
+    gap: 5px;
+    padding: 3px 0;
+}
+
+.selected-group {
+    border-radius: 50px;
+    padding: 5px 15px;
+    background-color: var(--background-alt);
+    margin: 0;
+}
+
+.counter-header {
+    font-size: 150px;
+    font-weight: 900;
+    letter-spacing: 10px;
+    margin-top: 0;
+    margin-bottom: 70px;
+    line-height: 95px;
+    font-family: 'Arial', sans-serif;
+    font-weight: 900;
+}
+
+.small-counter-header {
+    font-size: 50px;
+    font-weight: 900;
+    margin-top: 0;
+}
+
+.small-counter-header span {
+    font-family: 'Arial', sans-serif;
+    font-weight: 900;
+}
+
+.counter-message {
+    font-size: 100px;
+    font-weight: 900;
+}
+
+.counter-pretext {
+    margin: 0 0 10px 0;
+}
+
+.counter-subjects {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.counter-subjects .subject {
+    width: 120px;
+    box-shadow: 0 0 50px 15px #00a6ff;
+}
+
+.timetable-layout {
+    overflow-x: auto;
+}
+
+.timetable {
+    width: max-content;
+    padding: 0;
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border-collapse: separate;
+    margin: auto;
+}
+
+.subject-top {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.subject-top p {
+    width: 50%;
+    margin: 0;
+}
+
+.times {
+    display: flex;
+    background-color: var(--background-alt);
+}
+
+.times td {
+    width: 90px;
+}
+
+.times h1 {
+    margin: 0;
+    font-weight: 900;
+    text-align: center;
+}
+
+.times p {
+    margin: 0;
+    text-align: center;
+    font-size: 10px;
+}
+
+.day {
+    display: flex;
+}
+
+.day:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.timetable td {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 80px;
+    max-height: inherit !important;
+    min-width: 90px;
+}
+
+.timetable h2 {
+    margin: 0;
+    text-align: center;
+    min-height: 20px;
+}
+
+.timetable p {
+    text-align: center;
+    margin: 0;
+}
+
+.subject {
+    background-color: var(--background-alt);
+    margin: 2.5px;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.warning {
+    background-color: rgb(255, 96, 96);
+}
+
+.current-subject {
+    border: 2px solid #00a6ff;
+}
+
+.glow {
+    animation: glow 0.5s ease-in-out infinite alternate;
+}
+
+.static-glow {
+    text-shadow: 0 0 15px #00a6ff, 0 0 50px #00a6ff;
+}
+
+@-webkit-keyframes glow {
+    from {
+        text-shadow: 0 0 15px #00a6ff, 0 0 50px #00a6ff;
+    }
+
+    to {
+        text-shadow: 0 0 0 #00a6ff, 0 0 20px #00a6ff;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        padding-top: 100px;
+    }
+
+    .scrollable-x {
+        overflow-x: auto;
+        max-width: 100%;
+    }
+
+    .counter-header {
+        font-size: 120px;
+        letter-spacing: normal;
+        line-height: 130px;
+    }
+
+    .small-counter-header {
+        font-size: 30px;
+    }
+
+    .filters {
+        top: 0 !important;
+        height: 85px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .counter-message {
+        font-size: 40px;
+    }
+
+    .filter-dropdown-group {
+        margin: auto;
+    }
+}
