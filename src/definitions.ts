@@ -1,1 +1,0 @@
-export const BAKALARI_MUNICIPALITY_API_URL = "https://sluzby.bakalari.cz/api/v1/municipality"

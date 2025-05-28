@@ -10,7 +10,7 @@ export type HoursMinutes = { hours: number; minutes: number; }
 export type Filters = {
     domain: string;
     time: string;
-    class: string;
+    classId: string;
 }
 
 export class TimeSpan {
@@ -37,9 +37,11 @@ export const defaultTimetable = {
     times: [] as TimeSpan[]
 }
 
-export async function getTimetable(filters: Filters): Promise<typeof defaultTimetable> {
-    const url = filters.class !== ''
-        ? `${filters.domain}/Timetable/Public/${filters.time}/Class/${filters.class}`
+export async function getTimetable(filters: Filters | null | undefined): Promise<typeof defaultTimetable | null | undefined> {
+    if (!filters) return null;
+
+    const url = filters.classId !== ''
+        ? `${filters.domain}/Timetable/Public/${filters.time}/Class/${filters.classId}`
         : `${filters.domain}/Timetable/Public`;
     const response = await fetch(url);
     const html = await response.text();

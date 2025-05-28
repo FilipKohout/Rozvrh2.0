@@ -17,7 +17,7 @@ const router = createBrowserRouter([
         children: [
             { index: true, Component: HomePage },
             {
-                path: "timetable/:schoolId/:time/:class",
+                path: "timetable/:municipality/:schoolId/:classId",
                 Component: TimetablePage,
             },
             {

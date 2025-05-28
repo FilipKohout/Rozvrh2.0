@@ -1,11 +1,23 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import useMunicipalities from "../hooks/useMunicipalities.ts";
 import useSchools from "../hooks/useSchools.ts";
+import { useSchoolId } from "../hooks/useSchool.ts";
+import useTimetable from "../hooks/useTimetable.ts";
+import { Link } from "react-router";
 
 export default function InitPage() {
     const [municipality, setMunicipality] = useState("");
-    const { data: munis, isError: mError, isLoading: mLoading, isSuccess: mSuccess } = useMunicipalities();
-    const { data: schools, isError: sError, isLoading: sLoading, isSuccess: sSuccess } = useSchools(municipality);
+    const [schoolId, setSchoolId] = useState("");
+    const [classId, setClassId] = useState("");
+    const school = useSchoolId(municipality, schoolId);
+
+    const { data: munis, isError: mError, isFetching: mLoading, isSuccess: mSuccess } = useMunicipalities();
+    const { data: schools, isError: sError, isFetching: sLoading, isSuccess: sSuccess } = useSchools(municipality);
+    const { data: timetable, isError: tError, isFetching: tLoading, isSuccess: tSuccess } = useTimetable(school && {
+        domain: school?.schoolUrl,
+        classId: "",
+        time: "Actual",
+    });
 
     const MunicipalityOptions = useCallback(() => {
         return munis && (
@@ -15,7 +27,7 @@ export default function InitPage() {
                 </option>
             )
         )
-    }, [munis])
+    }, [munis]);
 
     const SchoolOptions = useCallback(() => {
         return schools && (
@@ -25,32 +37,79 @@ export default function InitPage() {
                 </option>
             )
         )
-    }, [schools])
+    }, [schools]);
+
+    const ClassOptions = useCallback(() => {
+        return timetable && timetable.classes && (
+            Array.from(timetable.classes).map(option =>
+                <option key={option[0]} value={option[0]}>
+                    {option[1]}
+                </option>
+            )
+        )
+    }, [timetable]);
+
+    useEffect(() => {
+        setClassId("");
+        setSchoolId("");
+    }, [municipality]);
+
+    useEffect(() => {
+        setClassId("");
+    }, [schoolId]);
 
     return (
-        <>
-            {mError && (<p>Error fetching municipalities</p>)}
-            {mLoading && (<p>Loading municipalities</p>)}
+        <div className="flex flex-col items-center justify-center gap-4 p-4 transition-all">
             {munis && mSuccess && munis.length > 0 &&
                 <>
                     <h1>Select Your Municipality</h1>
-                    <select onChange={(e) => setMunicipality(e.target.value)}>
-                        <option>select</option>
+                    <select value={municipality} onChange={(e) => setMunicipality(e.target.value)}>
+                        <option></option>
                         <MunicipalityOptions/>
                     </select>
                 </>
             }
-            {sError && (<p>Error fetching schools</p>)}
-            {sLoading && (<p>Loading schools</p>)}
-            {schools && sSuccess && schools.length > 0 &&
+            {mError && (<p>Error fetching municipalities</p>)}
+            {mLoading && (<p>Loading municipalities</p>)}
+
+            {municipality != "" &&
                 <>
-                    <h1>Select Your School</h1>
-                    <select>
-                        <option>select</option>
-                        <SchoolOptions/>
-                    </select>
+                    {schools && sSuccess && schools.length > 0 &&
+                        <>
+                            <h1>Select Your School</h1>
+                            <select value={schoolId} onChange={(e) => setSchoolId(e.target.value)}>
+                                <option></option>
+                                <SchoolOptions/>
+                            </select>
+                        </>
+                    }
+                    {sError && (<p>Error fetching schools</p>)}
+                    {sLoading && (<p>Loading schools</p>)}
                 </>
             }
-        </>
+
+            {municipality != "" && schoolId != "" &&
+                <>
+                    {timetable && tSuccess && Array.from(timetable.classes).length > 0 &&
+                        <>
+                            <h1>Select Your Class</h1>
+                            <select value={classId} onChange={(e) => setClassId(e.target.value)}>
+                                <option></option>
+                                <ClassOptions/>
+                            </select>
+                        </>
+                    }
+                    {tError && (<p>This school's Bakaláři timetable domain can't be accessed or it doesn't exist</p>)}
+                    {tLoading && (<p>Loading classes</p>)}
+                    {!tLoading && !tError && timetable && Array.from(timetable.classes).length == 0 && (<p>This school's Bakaláři timetable is private</p>)}
+                </>
+            }
+
+            {municipality != "" && schoolId != "" && classId != "" &&
+                <Link to={`/timetable/${municipality}/${schoolId}/${classId}`}>
+                    <button>View Timetable</button>
+                </Link>
+            }
+        </div>
     )
 }

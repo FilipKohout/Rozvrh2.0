@@ -3,6 +3,7 @@ import { useMemo } from "react";
 
 export function useSchoolId(municipality: string, schoolId: string) {
     const { data } = useSchools(municipality);
+    console.log(data);
     const school = useMemo(() =>
             (data || []).find(school => school.id == schoolId),
         [data, schoolId]

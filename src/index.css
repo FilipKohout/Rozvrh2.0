@@ -1,4 +1,6 @@
-#root {
+@import "tailwindcss";
+
+/*#root {
     --background-alt: #1a242f;
     margin: 0 auto;
     padding: 2rem 0.5rem;
@@ -271,4 +273,4 @@ footer ul {
     .filter-dropdown-group {
         margin: auto;
     }
-}
+}*/

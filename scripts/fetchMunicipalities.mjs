@@ -44,10 +44,9 @@ const xmlParser = new XMLParser({
                 const detailXml = await detailRes.text();
 
                 const jsonObj = xmlParser.parse(detailXml);
-                const safeName = name.replace(/[\/\\:*?"<>|]/g, '_');
 
-                await writeJson(`${OUTPUT_DIR}/${safeName}.json`, jsonObj, { spaces: 2 });
-                console.log(`(${index + 1}/${names.length}) ✅ Uloženo: ${safeName}.json`);
+                await writeJson(`${OUTPUT_DIR}/${name}.json`, jsonObj, { spaces: 2 });
+                console.log(`(${index + 1}/${names.length}) ✅ Uloženo: ${name}.json`);
             } catch (err) {
                 console.error(`(${index + 1}/${names.length}) ❌ Chyba u "${name}":`, err.message);
             }
