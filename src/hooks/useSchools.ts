@@ -4,7 +4,7 @@ import { getSchools, type School } from "../services/bakalariAPI.ts";
 export default function useSchools(municipality: string) {
     return useQuery<School[]>({
         queryFn() {
-            return getSchools(municipality);
+            return municipality == "" ? [] : getSchools(municipality);
         },
         queryKey: ['municipality', municipality],
     });

@@ -7,13 +7,18 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "fetch": "node scripts/fetchMunicipalityList.mjs && node scripts/fetchMunicipalities.mjs"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.76.2",
+    "fast-xml-parser": "^5.2.3",
+    "fs-extra": "^11.3.0",
+    "node-fetch": "^3.3.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router": "^7.6.1"
+    "react-router": "^7.6.1",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
