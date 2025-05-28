@@ -1,14 +1,19 @@
 @import "tailwindcss";
 
-/*#root {
+#root {
     --background-alt: #1a242f;
-    margin: 0 auto;
-    padding: 2rem 0.5rem;
     text-align: center;
-    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
 }
 
 body {
+    margin: auto;
+    height: 100%;
+    width: 100%;
+}
+
+/*body {
     margin: 0;
     padding-top: 60px;
     max-width: none;

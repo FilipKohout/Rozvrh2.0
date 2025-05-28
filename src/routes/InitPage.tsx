@@ -58,58 +58,56 @@ export default function InitPage() {
         setClassId("");
     }, [schoolId]);
 
+    const schoolVisible = schools && sSuccess && schools.length > 0;
+    const classVisible = timetable && tSuccess && Array.from(timetable.classes).length > 0;
+
     return (
-        <div className="flex flex-col items-center justify-center gap-4 p-4 transition-all">
+        <div className="flex flex-col items-center justify-center gap-4 p-4 h-screen">
             {munis && mSuccess && munis.length > 0 &&
-                <>
+                <div
+                    className="flex flex-col items-center p-1 justify-center gap-2 transition-all duration-1000 ease-in-out">
                     <h1>Select Your Municipality</h1>
                     <select value={municipality} onChange={(e) => setMunicipality(e.target.value)}>
                         <option></option>
                         <MunicipalityOptions/>
                     </select>
-                </>
+                </div>
             }
-            {mError && (<p>Error fetching municipalities</p>)}
-            {mLoading && (<p>Loading municipalities</p>)}
+            <p className={mError ? "" : "hidden"}>Error fetching municipalities</p>
+            <p className={mLoading ? "" : "hidden"}>Loading municipalities</p>
 
-            {municipality != "" &&
-                <>
-                    {schools && sSuccess && schools.length > 0 &&
-                        <>
-                            <h1>Select Your School</h1>
-                            <select value={schoolId} onChange={(e) => setSchoolId(e.target.value)}>
-                                <option></option>
-                                <SchoolOptions/>
-                            </select>
-                        </>
-                    }
-                    {sError && (<p>Error fetching schools</p>)}
-                    {sLoading && (<p>Loading schools</p>)}
-                </>
-            }
+            <div className={`flex flex-col items-center p-1 justify-center gap-2 transition-all duration-700 ease-in-out overflow-hidden ${municipality === "" ? "max-h-0 opacity-0 pointer-events-none" : "max-h-64 opacity-100"}`}>
+                <h1 className={schoolVisible ? "" : "hidden"}>Select Your School</h1>
+                {schoolVisible &&
+                    <select value={schoolId} onChange={(e) => setSchoolId(e.target.value)}>
+                        <option></option>
+                        <SchoolOptions/>
+                    </select>
+                }
+                <p className={sError ? "" : "hidden"}>Error fetching schools</p>
+                <p className={sLoading ? "" : "hidden"}>Loading schools</p>
+            </div>
 
-            {municipality != "" && schoolId != "" &&
-                <>
-                    {timetable && tSuccess && Array.from(timetable.classes).length > 0 &&
-                        <>
-                            <h1>Select Your Class</h1>
-                            <select value={classId} onChange={(e) => setClassId(e.target.value)}>
-                                <option></option>
-                                <ClassOptions/>
-                            </select>
-                        </>
-                    }
-                    {tError && (<p>This school's Bakaláři timetable domain can't be accessed or it doesn't exist</p>)}
-                    {tLoading && (<p>Loading classes</p>)}
-                    {!tLoading && !tError && timetable && Array.from(timetable.classes).length == 0 && (<p>This school's Bakaláři timetable is private</p>)}
-                </>
-            }
+            <div
+                className={`flex flex-col items-center p-1 justify-center gap-2 transition-all duration-700 ease-in-out overflow-hidden ${(municipality !== "" && schoolId !== "") ? "max-h-64 opacity-100" : "max-h-0 opacity-0 pointer-events-none"}`}>
+                <h1 className={classVisible ? "" : "hidden"}>Select Your Class</h1>
+                {classVisible &&
+                    <select value={classId}
+                            onChange={(e) => setClassId(e.target.value)}>
+                        <option></option>
+                        <ClassOptions/>
+                    </select>
+                }
+                <p className={tError ? "" : "hidden"}>This school's Bakaláři timetable domain can't be accessed or it
+                    doesn't exist</p>
+                <p className={tLoading ? "" : "hidden"}>Loading classes</p>
+                <p className={(!tLoading && !tError && timetable && Array.from(timetable.classes).length == 0) ? "" : "hidden"}>This
+                    school's Bakaláři timetable is private</p>
+            </div>
 
-            {municipality != "" && schoolId != "" && classId != "" &&
-                <Link to={`/timetable/${municipality}/${schoolId}/${classId}`}>
-                    <button>View Timetable</button>
-                </Link>
-            }
+            <Link to={`/timetable/${municipality}/${schoolId}/${classId}`} className={`transition-all duration-700 ease-in-out overflow-hidden ${(municipality != "" && schoolId != "" && classId != "") ? "max-h-64 opacity-100" : "max-h-0 opacity-0 pointer-events-none"}`}>
+                <button>View Timetable</button>
+            </Link>
         </div>
     )
 }
