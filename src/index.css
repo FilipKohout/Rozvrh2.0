@@ -1,7 +1,9 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 #root {
-    --background-alt: #1a242f;
+    --background-dark: #1a242f;
     text-align: center;
     height: 100%;
     width: 100%;

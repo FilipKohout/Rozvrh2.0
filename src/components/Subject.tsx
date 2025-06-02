@@ -8,19 +8,19 @@ type props = {
 }
 
 export default function Subject({ title, teacher, room, group, glow = false, warning = false }: props) {
-    let additinalClasses = ""
+    let classes = "bg-bg-alt m-0.5 p-1 rounded-lg"
 
-    if (warning) additinalClasses = additinalClasses + " warning"
-    if (glow) additinalClasses = additinalClasses + " static-glow current-subject"
+    if (warning) classes = classes + " warning"
+    if (glow) classes = classes + " static-glow current-subject"
 
     return (
-        <div className={"subject" + additinalClasses}>
+        <div className={classes}>
             <div className="subject-top">
                 <p>{group && group}</p>
                 <p>{room}</p>
             </div>
             <h2>{title.slice(0, 3)}</h2>
-            <p>{teacher}</p>
+            <p className="text-center m-0">{teacher}</p>
         </div>
     )
 }
