@@ -8,11 +8,11 @@ export default {
     theme: {
         extend: {
             colors: {
-                /*foreground: "rgb(var(--foreground))",
-                background: "rgb(var(--background))",
-                primary: "rgb(var(--primary))",
-                secondary: "rgb(var(--secondary))",*/
+               "background-alt": "var(--background-alt)",
             },
+            borderRadius: {
+                DEFAULT: "var(--corners)"
+            }
         },
     },
     plugins: [],
