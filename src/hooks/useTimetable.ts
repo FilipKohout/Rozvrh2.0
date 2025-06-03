@@ -11,6 +11,6 @@ export default function useTimetable(filters?: Filters) {
         queryFn() {
             return getTimetable(filters ?? contextFilters);
         },
-        queryKey: ['timetable', filters],
+        queryKey: ['timetable', filters, contextFilters],
     });
 }

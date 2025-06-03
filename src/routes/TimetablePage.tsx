@@ -9,19 +9,21 @@ import { TimeProvider } from "../providers/TimeProvider.tsx";
 export default function TimetablePage() {
     const urlParams = new URLSearchParams(window.location.search);
     const time = urlParams.get("time") || "Actual";
+    const counterMode = urlParams.get("counter") || "false";
 
     const { municipality, schoolId, classId } = useParams();
     const school = useSchoolId(municipality || "", schoolId || "");
     const { setFilters } = useContext(FiltersContext);
 
     useEffect(() => {
-        if (school && classId)
+        if (school && classId) {
             setFilters({
-                domain:  school.schoolUrl,
+                domain: school.schoolUrl,
                 time,
                 classId,
             });
-    }, [municipality, schoolId, classId, time]);
+        }
+    }, [school, classId, time]);
 
     if (!municipality) return <h1>Invalid municipality</h1>;
     if (!schoolId) return <h1>Invalid school id</h1>;
@@ -33,7 +35,9 @@ export default function TimetablePage() {
             <TimeProvider>
                 <Timer />
             </TimeProvider>
-            <Timetable />
+            {counterMode === "false" &&
+                <Timetable />
+            }
         </>
     );
 }

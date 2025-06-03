@@ -8,7 +8,8 @@ export default {
     theme: {
         extend: {
             colors: {
-               "background-alt": "var(--background-alt)",
+                "background-alt": "var(--background-alt)",
+                "negative": "var(--negative)",
             },
             borderRadius: {
                 DEFAULT: "var(--corners)"

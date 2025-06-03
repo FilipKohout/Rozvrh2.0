@@ -11,7 +11,16 @@ import InitPage from "./routes/InitPage.tsx";
 import { FiltersProvider } from "./providers/FiltersProvider.tsx";
 import { GroupsProvider } from "./providers/GroupsProvider.tsx";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            refetchOnWindowFocus: false,
+            refetchOnReconnect: false,
+            refetchOnMount: false,
+            retry: 3,
+        },
+    },
+});
 
 const router = createBrowserRouter([
     {

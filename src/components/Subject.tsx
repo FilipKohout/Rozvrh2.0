@@ -7,9 +7,17 @@ type props = {
     warning?: boolean
 }
 
-export default function Subject({ title, teacher, room, group }: props) {
+export default function Subject({ title, teacher, room, group, warning = false, glow = false }: props) {
+    let classes = "";
+
+    if (warning)
+        classes += " bg-negative ";
+
+    if (glow)
+        classes += " static-glow ";
+
     return (
-        <div className={"bg-background-alt m-0.5 p-1.5 rounded flex flex-col "}>
+        <div className={"bg-background-alt m-0.5 p-1.5 rounded flex flex-col" + classes}>
             <div className="flex flex-row">
                 <p className="text-xs m-0">{group && group}</p>
                 <p className="text-xs ml-auto m-0">{room}</p>

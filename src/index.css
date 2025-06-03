@@ -4,9 +4,10 @@
 
 :root {
     --corners: 12px;
+    --negative: rgb(255, 96, 96);
 }
 
-table td {
+table td, .subject-holder {
     min-width: 100px;
     max-width: 100px;
     padding: 0;

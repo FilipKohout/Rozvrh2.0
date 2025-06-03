@@ -2,13 +2,15 @@ import useTimetable from "../hooks/useTimetable.ts";
 import Subject from "./Subject.tsx";
 
 export default function Timetable() {
-    const { data, isError, isLoading } = useTimetable();
+    const { data, isError, isFetching } = useTimetable();
+
+    console.log("Timetable data:", data);
 
     return (
         <div className="overflow-x-auto rounded">
             {isError && <h1>Loading error</h1>}
-            {isLoading && <h1>Loading...</h1>}
-            {!isLoading && !isError && data &&
+            {isFetching && <h1>Loading...</h1>}
+            {!isFetching && !isError && data &&
                 <table className="border-2 border-white/5 rounded-lg border-collapse">
                     <thead>
                         <tr className="flex bg-background-alt">
