@@ -105,7 +105,7 @@ export default function InitPage() {
                     school's Bakaláři timetable is private</p>
             </div>
 
-            <Link to={`/timetable/${municipality}/${schoolId}/${classId}`} className={`transition-all duration-700 ease-in-out overflow-hidden ${(municipality != "" && schoolId != "" && classId != "") ? "max-h-64 opacity-100" : "max-h-0 opacity-0 pointer-events-none"}`}>
+            <Link to={`/timetable/${municipality}/${schoolId}/${classId}`} className={`transition-all duration-700 p-0.5 ease-in-out overflow-hidden ${(municipality != "" && schoolId != "" && classId != "") ? "max-h-64 opacity-100" : "max-h-0 opacity-0 pointer-events-none"}`}>
                 <button>View Timetable</button>
             </Link>
         </div>

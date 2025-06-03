@@ -1,6 +1,10 @@
 import Timetable from "../components/Timetable.tsx";
 import { useParams } from "react-router";
 import { useSchoolId } from "../hooks/useSchool.ts";
+import Timer from "../components/Timer.tsx";
+import { useContext, useEffect } from "react";
+import { FiltersContext } from "../providers/FiltersProvider.tsx";
+import { TimeProvider } from "../providers/TimeProvider.tsx";
 
 export default function TimetablePage() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -8,6 +12,16 @@ export default function TimetablePage() {
 
     const { municipality, schoolId, classId } = useParams();
     const school = useSchoolId(municipality || "", schoolId || "");
+    const { setFilters } = useContext(FiltersContext);
+
+    useEffect(() => {
+        if (school && classId)
+            setFilters({
+                domain:  school.schoolUrl,
+                time,
+                classId,
+            });
+    }, [municipality, schoolId, classId, time]);
 
     if (!municipality) return <h1>Invalid municipality</h1>;
     if (!schoolId) return <h1>Invalid school id</h1>;
@@ -15,10 +29,11 @@ export default function TimetablePage() {
     if (!school) return <h1>Error finding or fetching the school</h1>;
 
     return (
-        <Timetable filters={{
-            domain: school.schoolUrl,
-            time,
-            classId,
-        }} />
+        <>
+            <TimeProvider>
+                <Timer />
+            </TimeProvider>
+            <Timetable />
+        </>
     );
 }

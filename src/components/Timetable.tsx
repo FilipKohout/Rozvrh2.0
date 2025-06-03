@@ -1,9 +1,8 @@
 import useTimetable from "../hooks/useTimetable.ts";
 import Subject from "./Subject.tsx";
-import type { Filters } from "../services/timetable.ts";
 
-export default function Timetable({ filters }: { filters: Filters }) {
-    const { data, isError, isLoading } = useTimetable(filters)
+export default function Timetable() {
+    const { data, isError, isLoading } = useTimetable();
 
     return (
         <div className="overflow-x-auto rounded">
@@ -16,7 +15,7 @@ export default function Timetable({ filters }: { filters: Filters }) {
                             {data.times.map((hour, hourIndex) => hour &&
                                 <td key={hourIndex}>
                                     <div className="bg-background-alt m-0.5 rounded-lg flex flex-col">
-                                        <h1 className="mx-0 text-center min-h-[20px] text-4xl">{hourIndex}</h1>
+                                        <h1 className="mx-0 text-center my-1.5 font-extrabold text-4xl">{hourIndex}</h1>
                                         <p className="text-center m-0 text-xs">{hour.toString()}</p>
                                     </div>
                                 </td>
@@ -27,7 +26,7 @@ export default function Timetable({ filters }: { filters: Filters }) {
                         {data.subjects.map((day, dayIndex) =>
                             <tr className="flex" key={dayIndex}>
                                 {day.map((subjectGroup, subjectGroupIndex) =>
-                                    <td key={subjectGroupIndex}>
+                                    <td key={subjectGroupIndex} className="flex flex-col justify-center">
                                         {subjectGroup.map((subject, subjectIndex) =>
                                             <Subject
                                                 key={`${dayIndex}-${subjectGroupIndex}-${subjectIndex}`}

@@ -8,6 +8,8 @@ import TimetablePage from "./routes/TimetablePage.tsx";
 import HomePage from "./routes/HomePage.tsx";
 import MainLayout from "./routes/MainLayout.tsx";
 import InitPage from "./routes/InitPage.tsx";
+import { FiltersProvider } from "./providers/FiltersProvider.tsx";
+import { GroupsProvider } from "./providers/GroupsProvider.tsx";
 
 const queryClient = new QueryClient();
 
@@ -19,7 +21,12 @@ const router = createBrowserRouter([
             { index: true, Component: HomePage },
             {
                 path: "timetable/:municipality/:schoolId/:classId",
-                Component: TimetablePage,
+                Component: () =>
+                    <FiltersProvider>
+                        <GroupsProvider>
+                            <TimetablePage />
+                        </GroupsProvider>
+                    </FiltersProvider>
             },
             {
                 path: "init",
