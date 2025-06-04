@@ -31,13 +31,13 @@ export default function TimetablePage() {
     if (!school) return <h1>Error finding or fetching the school</h1>;
 
     return (
-        <>
+        <div className="mt-16">
             <TimeProvider>
                 <Timer />
             </TimeProvider>
             {counterMode === "false" &&
                 <Timetable />
             }
-        </>
+        </div>
     );
 }

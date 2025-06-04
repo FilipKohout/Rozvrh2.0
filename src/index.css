@@ -3,8 +3,23 @@
 @tailwind utilities;
 
 :root {
-    --corners: 12px;
+    --background-body: #131722;
+    --background: #161f27;
+    --background-alt: #0f1219;
     --negative: rgb(255, 96, 96);
+    --select: #1c2735;
+    --corners: 12px;
+}
+
+body {
+    background-color: var(--background-body);
+    color: white;
+    font-family: 'Inter', sans-serif;
+}
+
+html {
+    scrollbar-color: #040a0f #202b38;
+    scrollbar-width: thin;
 }
 
 table td, .subject-holder {
@@ -13,10 +28,19 @@ table td, .subject-holder {
     padding: 0;
 }
 
-select {
+button, select {
     border-radius: var(--corners);
+    margin-right: 6px;
+    margin-bottom: 6px;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background-color: var(--background-alt);
+    color: white;
+    font-size: 16px;
+    transition: all 0.2s ease-in-out;
 }
 
-button {
-    border-radius: var(--corners);
+button:hover, select:hover, select:focus {
+    background-color: var(--select);
 }

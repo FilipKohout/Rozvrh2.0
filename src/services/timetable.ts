@@ -3,6 +3,7 @@ export interface Subject {
     teacher: string;
     room: string;
     warning: boolean;
+    details: SubjectDetails;
     group?: string;
 }
 
@@ -11,6 +12,11 @@ export type Filters = {
     domain: string;
     time: string;
     classId: string;
+}
+export type SubjectDetails = {
+    subjectTest: string;
+    teacher: string;
+    changeInfo: string;
 }
 
 export class TimeSpan {
@@ -70,7 +76,18 @@ export async function getTimetable(filters: Filters | null | undefined): Promise
                 const warning = element.querySelector(".day-item-hover")?.classList.contains('pink');
 
                 if (subject && teacher && room)
-                    subjects.push({ title: subject, teacher: teacher, group: group, room: room, warning: warning || false });
+                    subjects.push({
+                        title: subject,
+                        teacher: teacher,
+                        group: group,
+                        room: room,
+                        details: {
+                            subjectTest: "",
+                            teacher: "",
+                            changeInfo: ""
+                        },
+                        warning: warning || false
+                    });
 
                 if (group && !newTable.groups.find(value => value == group))
                     newTable.groups.push(group);

@@ -32,7 +32,7 @@ export default function Timer() {
                 <>
                 <h2 className="m-0">{timerPrefix}</h2>
 
-                    <h1 className="glow text-9xl -mt-1 font-black flex justify-center">
+                    <h1 className="text-9xl -mt-1 mb-4 font-black flex justify-center">
                         {formatDigits(time.current).map((unit, i) => (
                             <span key={i} className="flex">
                                 {unit.split("").map((char, j) => (
