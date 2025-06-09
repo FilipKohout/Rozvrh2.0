@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import useTimetable from "./useTimetable";
 import { type CurrentClass, TimeContext } from "../providers/TimeProvider.tsx";
 import { GroupsContext } from "../providers/GroupsProvider.tsx";
-import type { Subject } from "../services/timetable.ts";
+import type { Subject } from "../services/timetableAPI.ts";
 
 type TimerData = {
     current: number;

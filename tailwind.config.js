@@ -9,6 +9,7 @@ export default {
         extend: {
             colors: {
                 "background-alt": "var(--background-alt)",
+                "background": "var(--background)",
                 "negative": "var(--negative)",
             },
             borderRadius: {

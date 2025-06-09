@@ -32,7 +32,7 @@ export default function Timetable() {
                                         {subjectGroup.map((subject, subjectIndex) =>
                                             <Subject
                                                 key={`${dayIndex}-${subjectGroupIndex}-${subjectIndex}`}
-                                                {...subject}
+                                                subject={subject}
                                             />
                                         )}
                                     </td>

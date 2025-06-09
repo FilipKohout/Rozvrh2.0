@@ -1,4 +1,4 @@
-import { defaultTimetable, type Filters, getTimetable } from "../services/timetable.ts";
+import { defaultTimetable, type Filters, getTimetable } from "../services/timetableAPI.ts";
 import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { FiltersContext } from "../providers/FiltersProvider.tsx";

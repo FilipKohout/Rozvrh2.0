@@ -14,7 +14,7 @@ export type Filters = {
     classId: string;
 }
 export type SubjectDetails = {
-    subjectTest: string;
+    subjectText: string;
     teacher: string;
     changeInfo: string;
 }
@@ -24,10 +24,10 @@ export class TimeSpan {
     to: HoursMinutes;
 
     constructor(text: string) {
-        const split = text.split(' - ');
+        const split = text.split(" - ");
 
-        const from = split[0].split(':');
-        const to = split[1].split(':');
+        const from = split[0].split(":");
+        const to = split[1].split(":");
 
         this.from = { hours: parseInt(from[0]), minutes: parseInt(from[1]) };
         this.to = { hours: parseInt(to[0]), minutes: parseInt(to[1]) };
@@ -46,7 +46,7 @@ export const defaultTimetable = {
 export async function getTimetable(filters: Filters | null | undefined): Promise<typeof defaultTimetable | null | undefined> {
     if (!filters) return null;
 
-    const url = filters.classId !== ''
+    const url = filters.classId !== ""
         ? `${filters.domain}/Timetable/Public/${filters.time}/Class/${filters.classId}`
         : `${filters.domain}/Timetable/Public`;
     const response = await fetch(url);
@@ -73,7 +73,8 @@ export async function getTimetable(filters: Filters | null | undefined): Promise
                 const teacher = element.querySelector(".bottom span")?.innerHTML;
                 const group = element.querySelector(".left div")?.innerHTML;
                 const room = element.querySelector(".right div")?.innerHTML;
-                const warning = element.querySelector(".day-item-hover")?.classList.contains('pink');
+                const warning = element.querySelector(".day-item-hover")?.classList.contains("pink") || element.classList.contains("pink");
+                const detailsString = JSON.parse(element.getAttribute("data-detail") || element.querySelector(".day-item-hover")?.getAttribute("data-detail") || "{}");
 
                 if (subject && teacher && room)
                     subjects.push({
@@ -82,9 +83,9 @@ export async function getTimetable(filters: Filters | null | undefined): Promise
                         group: group,
                         room: room,
                         details: {
-                            subjectTest: "",
-                            teacher: "",
-                            changeInfo: ""
+                            subjectText: detailsString.subjecttext || "",
+                            teacher: detailsString.teacher || "",
+                            changeInfo: detailsString.changeinfo || ""
                         },
                         warning: warning || false
                     });
@@ -112,8 +113,8 @@ export async function getTimetable(filters: Filters | null | undefined): Promise
     });
 
     classes.forEach((_class) => {
-        if ((_class as HTMLOptionElement).value != '') {
-            newTable.classes.set((_class as HTMLOptionElement).value, _class.innerHTML.replace(/\s/g, '').replace(/\r?\n|\r/, ''));
+        if ((_class as HTMLOptionElement).value != "") {
+            newTable.classes.set((_class as HTMLOptionElement).value, _class.innerHTML.replace(/\s/g, "").replace(/\r?\n|\r/, ""));
         }
     });
 

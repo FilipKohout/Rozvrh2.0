@@ -46,7 +46,7 @@ export default function Timer() {
                     <div className="flex flex-row justify-center">
                         {currentClass.subjects.map((subject, index) =>
                             <div className="subject-holder" key={index}>
-                                <Subject {...subject} />
+                                <Subject subject={subject} />
                             </div>
                         )}
                     </div>
