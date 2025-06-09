@@ -62,12 +62,12 @@ export default function InitPage() {
     const classVisible = timetable && tSuccess && Array.from(timetable.classes).length > 0;
 
     return (
-        <div className="flex flex-col items-center justify-center gap-4 p-4 h-screen">
+        <div className="flex flex-col items-center justify-center gap-4 p-4 h-screen overflow-hidden">
             {munis && mSuccess && munis.length > 0 &&
                 <div
                     className="flex flex-col items-center p-1 justify-center gap-2 transition-all duration-1000 ease-in-out">
                     <h1>Select Your Municipality</h1>
-                    <select value={municipality} onChange={(e) => setMunicipality(e.target.value)}>
+                    <select className="max-w-md" value={municipality} onChange={(e) => setMunicipality(e.target.value)}>
                         <option></option>
                         <MunicipalityOptions/>
                     </select>
@@ -79,7 +79,7 @@ export default function InitPage() {
             <div className={`flex flex-col items-center p-1 justify-center gap-2 transition-all duration-700 ease-in-out overflow-hidden ${municipality === "" ? "max-h-0 opacity-0 pointer-events-none" : "max-h-64 opacity-100"}`}>
                 <h1 className={schoolVisible ? "" : "hidden"}>Select Your School</h1>
                 {schoolVisible &&
-                    <select value={schoolId} onChange={(e) => setSchoolId(e.target.value)}>
+                    <select className="max-w-md" value={schoolId} onChange={(e) => setSchoolId(e.target.value)}>
                         <option></option>
                         <SchoolOptions/>
                     </select>

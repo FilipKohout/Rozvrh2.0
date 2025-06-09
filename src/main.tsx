@@ -4,7 +4,6 @@ import "./index.css"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import TimetablePage from "./routes/TimetablePage.tsx";
-import HomePage from "./routes/HomePage.tsx";
 import MainLayout from "./routes/MainLayout.tsx";
 import InitPage from "./routes/InitPage.tsx";
 import { FiltersProvider } from "./providers/FiltersProvider.tsx";
@@ -25,7 +24,7 @@ const router = createBrowserRouter([
         path: "/",
         Component: MainLayout,
         children: [
-            { index: true, Component: HomePage },
+            { index: true, Component: InitPage },
             {
                 path: "timetable/:municipality/:schoolId/:classId",
                 Component: () =>
@@ -34,10 +33,6 @@ const router = createBrowserRouter([
                             <TimetablePage />
                         </GroupsProvider>
                     </FiltersProvider>
-            },
-            {
-                path: "init",
-                Component: InitPage,
             },
         ],
     },

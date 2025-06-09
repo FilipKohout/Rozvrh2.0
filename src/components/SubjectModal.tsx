@@ -12,7 +12,7 @@ export default function SubjectModal({ subject, onClose }: { subject: Subject; o
             onClick={onClose}
         >
             <motion.div
-                className="relative m-auto rounded bg-background p-6 shadow-xl max-w-md"
+                className="relative m-auto rounded bg-background p-4 shadow-xl max-w-md"
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
@@ -32,7 +32,7 @@ export default function SubjectModal({ subject, onClose }: { subject: Subject; o
                     <h2 className="mt-2 text-red-500">{subject.details.changeInfo}</h2>
                 )}
 
-                <button onClick={onClose}>
+                <button className="mb-0 bg-negative hover:bg-red-500" onClick={onClose}>
                     Close
                 </button>
             </motion.div>

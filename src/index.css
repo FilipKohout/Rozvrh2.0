@@ -44,3 +44,7 @@ button, select {
 button:hover, select:hover, select:focus {
     background-color: var(--select);
 }
+
+.invisibleScrollbar {
+    scrollbar-width: none;
+}
