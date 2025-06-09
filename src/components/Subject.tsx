@@ -3,11 +3,11 @@ import type { Subject } from "../services/timetableAPI.ts";
 import SubjectModal from "./SubjectModal.tsx";
 import { AnimatePresence } from "framer-motion";
 
-export default function Subject({ subject }: { subject: Subject }) {
+export default function Subject({ subject, className }: { subject: Subject, className?: string }) {
     const { group, room, teacher, title, warning } = subject;
     const [openModal, setOpenModal] = useState(false);
 
-    let classes = "";
+    let classes = className || "";
 
     if (warning)
         classes += " bg-negative ";
@@ -19,7 +19,7 @@ export default function Subject({ subject }: { subject: Subject }) {
                     <SubjectModal subject={subject} onClose={() => setOpenModal(false)} />
                 )}
             </AnimatePresence>
-            <button className={"bg-background-alt m-0.5 p-1.5 rounded flex flex-col" + classes} onClick={() => setOpenModal(true)}>
+            <button className={"bg-background-alt m-0.5 p-1.5 rounded flex flex-col " + classes} onClick={() => setOpenModal(true)}>
                 <div className="flex flex-row">
                     <p className="text-xs m-0">{group && group}</p>
                     <p className="text-xs ml-auto m-0">{room}</p>

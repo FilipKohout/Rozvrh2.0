@@ -1,6 +1,6 @@
 import { createContext, type SetStateAction } from "react";
 import * as React from "react";
-import type { Subject } from "../services/timetable.ts";
+import type { Subject } from "../services/timetableAPI.ts";
 
 export interface CurrentClass {
     subjects: Subject[];

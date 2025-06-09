@@ -1,8 +1,11 @@
 import useTimetable from "../hooks/useTimetable.ts";
 import Subject from "./Subject.tsx";
+import { useContext } from "react";
+import { GroupsContext } from "../providers/GroupsProvider.tsx";
 
 export default function Timetable() {
     const { data, isError, isFetching } = useTimetable();
+    const { groups } = useContext(GroupsContext);
 
     console.log("Timetable data:", data);
 
@@ -28,12 +31,13 @@ export default function Timetable() {
                         {data.subjects.map((day, dayIndex) =>
                             <tr className="flex" key={dayIndex}>
                                 {day.map((subjectGroup, subjectGroupIndex) =>
-                                    <td key={subjectGroupIndex} className="flex flex-col justify-center">
+                                    <td key={subjectGroupIndex} className={"flex flex-col justify-center " + (dayIndex % 2 !== 0 ? "bg-background" : "")}>
                                         {subjectGroup.map((subject, subjectIndex) =>
-                                            <Subject
-                                                key={`${dayIndex}-${subjectGroupIndex}-${subjectIndex}`}
-                                                subject={subject}
-                                            />
+                                            (groups == null || groups.length === 0 || subject.group == "" || (groups && groups.includes(subject.group!))) &&
+                                                <Subject
+                                                    key={`${dayIndex}-${subjectGroupIndex}-${subjectIndex}`}
+                                                    subject={subject}
+                                                />
                                         )}
                                     </td>
                                 )}

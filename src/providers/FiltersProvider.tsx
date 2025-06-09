@@ -1,6 +1,6 @@
 import { createContext, type SetStateAction } from "react";
 import * as React from "react";
-import type { Filters } from "../services/timetable.ts";
+import type { Filters } from "../services/timetableAPI.ts";
 
 export interface FiltersContextType {
     filters: Filters | null;

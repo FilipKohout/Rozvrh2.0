@@ -5,6 +5,7 @@ import Timer from "../components/Timer.tsx";
 import { useContext, useEffect } from "react";
 import { FiltersContext } from "../providers/FiltersProvider.tsx";
 import { TimeProvider } from "../providers/TimeProvider.tsx";
+import TimetableOptions from "../components/TimetableOptions.tsx";
 
 export default function TimetablePage() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -31,13 +32,18 @@ export default function TimetablePage() {
     if (!school) return <h1>Error finding or fetching the school</h1>;
 
     return (
-        <div className="mt-16">
-            <TimeProvider>
-                <Timer />
-            </TimeProvider>
-            {counterMode === "false" &&
-                <Timetable />
-            }
-        </div>
+        <>
+            <div className="mt-4">
+                <TimeProvider>
+                    <Timer/>
+                </TimeProvider>
+                {counterMode === "false" &&
+                    <>
+                        <TimetableOptions />
+                        <Timetable/>
+                    </>
+                }
+            </div>
+        </>
     );
 }
