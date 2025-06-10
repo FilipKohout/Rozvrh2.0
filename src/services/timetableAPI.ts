@@ -1,9 +1,9 @@
 export interface Subject {
     title: string;
     teacher: string;
-    room: string;
     warning: boolean;
     details: SubjectDetails;
+    room?: string;
     group?: string;
 }
 
@@ -76,7 +76,7 @@ export async function getTimetable(filters: Filters | null | undefined): Promise
                 const warning = element.querySelector(".day-item-hover")?.classList.contains("pink") || element.classList.contains("pink");
                 const detailsString = JSON.parse(element.getAttribute("data-detail") || element.querySelector(".day-item-hover")?.getAttribute("data-detail") || "{}");
 
-                if (subject && teacher && room)
+                if (subject && teacher)
                     subjects.push({
                         title: subject,
                         teacher: teacher,

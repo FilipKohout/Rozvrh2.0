@@ -23,7 +23,9 @@ export default function SubjectModal({ subject, onClose }: { subject: Subject; o
                 <hr />
                 <h2 className="text-xl m-0">{subject.details.teacher}</h2>
                 <div className="flex gap-2 justify-center">
-                    <h3 className="text-sm">Room {subject.room}</h3>
+                    {subject.room &&
+                        <h3 className="text-sm">Room {subject.room}</h3>
+                    }
                     {subject.group &&
                         <h3 className="text-sm">Group {subject.group}</h3>
                     }

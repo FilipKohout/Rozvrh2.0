@@ -91,7 +91,8 @@ export default function useTimer() {
                 end: (endTime.to.hours * 3600 + endTime.to.minutes * 60) - (hour * 3600 + minute * 60 + second)
             });
             setCurrentClass(currentClassData);
-        } else {
+        }
+        else if (endTime) {
             setTimerPrefix("Class ends in");
             setTime({
                 current: (time.to.hours * 3600 + time.to.minutes * 60) - (hour * 3600 + minute * 60 + second),
