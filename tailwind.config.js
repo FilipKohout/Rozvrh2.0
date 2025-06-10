@@ -11,6 +11,7 @@ export default {
                 "background-alt": "var(--background-alt)",
                 "background": "var(--background)",
                 "negative": "var(--negative)",
+                "select": "var(--select)",
             },
             borderRadius: {
                 DEFAULT: "var(--corners)"

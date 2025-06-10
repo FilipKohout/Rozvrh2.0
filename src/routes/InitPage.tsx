@@ -4,6 +4,7 @@ import useSchools from "../hooks/useSchools.ts";
 import { useSchoolId } from "../hooks/useSchool.ts";
 import useTimetable from "../hooks/useTimetable.ts";
 import { Link } from "react-router";
+import SearchSelect from "../components/SearchSelect.tsx";
 
 export default function InitPage() {
     const [municipality, setMunicipality] = useState("");
@@ -18,16 +19,6 @@ export default function InitPage() {
         classId: "",
         time: "Actual",
     });
-
-    const MunicipalityOptions = useCallback(() => {
-        return munis && (
-            munis.map(option =>
-                <option key={option.name} value={option.name}>
-                    {option.name}
-                </option>
-            )
-        )
-    }, [munis]);
 
     const SchoolOptions = useCallback(() => {
         return schools && (
@@ -67,9 +58,13 @@ export default function InitPage() {
                 <div
                     className="flex flex-col items-center p-1 justify-center gap-2 transition-all duration-1000 ease-in-out">
                     <h1>Select Your Municipality</h1>
-                    <select className="max-w-md" value={municipality} onChange={(e) => setMunicipality(e.target.value)}>
-                        <MunicipalityOptions/>
-                    </select>
+                    <SearchSelect
+                        options={munis.map((option) => ({
+                            value: option.name,
+                            label: option.name
+                        }))}
+                        onChange={option => setMunicipality(option?.value || "")}
+                        value={municipality} />
                 </div>
             }
             <p className={mError ? "" : "hidden"}>Error fetching municipalities</p>
@@ -78,10 +73,13 @@ export default function InitPage() {
             <div className={`flex flex-col items-center p-1 justify-center gap-2 transition-all duration-700 ease-in-out overflow-hidden ${municipality === "" ? "max-h-0 opacity-0 pointer-events-none" : "max-h-64 opacity-100"}`}>
                 <h1 className={schoolVisible ? "" : "hidden"}>Select Your School</h1>
                 {schoolVisible &&
-                    <select className="max-w-md" value={schoolId} onChange={(e) => setSchoolId(e.target.value)}>
-                        <option></option>
-                        <SchoolOptions/>
-                    </select>
+                    <SearchSelect
+                        options={schools.map((option) => ({
+                            value: option.id,
+                            label: option.name
+                        }))}
+                        onChange={option => setSchoolId(option?.value || "")}
+                        value={schoolId} />
                 }
                 <p className={sError ? "" : "hidden"}>Error fetching schools</p>
                 <p className={sLoading ? "" : "hidden"}>Loading schools</p>

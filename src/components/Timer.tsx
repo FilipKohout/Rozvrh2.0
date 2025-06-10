@@ -22,6 +22,7 @@ export default function Timer() {
     };
 
     const fullscreen = () => {
+        console.log(location.origin + location.pathname + "?counter=true");
         window.open(location.origin + location.pathname + "?counter=true", "_blank", "fullscreen=yes,menubar=no,toolbar=no,location=no,status=no,scrollbars=no,resizable=no,width=800,height=600");
     };
 
