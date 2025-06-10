@@ -19,7 +19,7 @@ const xmlParser = new XMLParser({
 
 (async () => {
     try {
-        console.log('📥 Stahuji seznam obcí...');
+        console.log('Stahuji seznam obcí...');
         const res = await fetch(BASE_URL);
         const xml = await res.text();
         const data = await parseStringPromise(xml);
@@ -29,7 +29,7 @@ const xmlParser = new XMLParser({
             .map(info => info.name?.[0]?.trim())
             .filter(Boolean);
 
-        console.log(`🔍 Nalezeno ${names.length} obcí.`);
+        console.log(`Nalezeno ${names.length} obcí.`);
 
         // 🧹 Smazat složku pokud existuje a vytvořit znovu
         await remove(OUTPUT_DIR);
@@ -46,16 +46,16 @@ const xmlParser = new XMLParser({
                 const jsonObj = xmlParser.parse(detailXml);
 
                 await writeJson(`${OUTPUT_DIR}/${name}.json`, jsonObj, { spaces: 2 });
-                console.log(`(${index + 1}/${names.length}) ✅ Uloženo: ${name}.json`);
+                console.log(`(${index + 1}/${names.length}) Uloženo: ${name}.json`);
             } catch (err) {
-                console.error(`(${index + 1}/${names.length}) ❌ Chyba u "${name}":`, err.message);
+                console.error(`(${index + 1}/${names.length}) Chyba u "${name}":`, err.message);
             }
 
-            await delay(200); // ochrana proti přílišnému zatížení serveru
+            await delay(200);
         }
 
-        console.log('\n🏁 Hotovo.');
+        console.log('\nHotovo.');
     } catch (err) {
-        console.error('❌ Kritická chyba:', err.message);
+        console.error('Kritická chyba:', err.message);
     }
 })();

@@ -10,20 +10,19 @@ const OUTPUT_FILE = `${OUTPUT_DIR}/municipality-list.json`;
 
 (async () => {
     try {
-        console.log('📥 Stahuji seznam obcí...');
+        console.log('Stahuji seznam obcí...');
 
         const res = await fetch(BASE_URL);
         const xml = await res.text();
 
-        // 👇 zde upraveno
         const data = await parseStringPromise(xml, { explicitArray: false });
 
         await ensureDir(OUTPUT_DIR);
 
         await writeJson(OUTPUT_FILE, data, { spaces: 2 });
 
-        console.log(`✅ Uloženo: ${OUTPUT_FILE}`);
+        console.log(`Uloženo: ${OUTPUT_FILE}`);
     } catch (err) {
-        console.error('❌ Chyba:', err.message);
+        console.error('Chyba:', err.message);
     }
 })();
