@@ -68,7 +68,6 @@ export default function InitPage() {
                     className="flex flex-col items-center p-1 justify-center gap-2 transition-all duration-1000 ease-in-out">
                     <h1>Select Your Municipality</h1>
                     <select className="max-w-md" value={municipality} onChange={(e) => setMunicipality(e.target.value)}>
-                        <option></option>
                         <MunicipalityOptions/>
                     </select>
                 </div>
