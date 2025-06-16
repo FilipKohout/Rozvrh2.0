@@ -20,16 +20,6 @@ export default function InitPage() {
         time: "Actual",
     });
 
-    const SchoolOptions = useCallback(() => {
-        return schools && (
-            schools.map(option =>
-                <option key={option.id} value={option.id}>
-                    {option.name}
-                </option>
-            )
-        )
-    }, [schools]);
-
     const ClassOptions = useCallback(() => {
         return timetable && timetable.classes && (
             Array.from(timetable.classes).map(option =>

@@ -55,12 +55,12 @@ export default function SearchSelect({ options, placeholder = "Select", onChange
             />
 
             {isOpen &&
-                <div className="invisibleScrollbar bg-background-alt rounded absolute z-10 max-h-64 box-border p-2 mt-10 w-80 overflow-y-scroll flex flex-col items-center gap-1">
+                <div className="invisibleScrollbar bg-background-alt rounded absolute z-10 max-h-64 box-border p-1 mt-10 w-80 overflow-y-scroll flex flex-col items-center gap-1">
                     {filteredOptions.map((opt) => (
                         <button
                             key={opt.value}
                             onClick={() => handleSelect(opt)}
-                            className={`m-0 text-sm cursor-pointer w-full ${selected?.value === opt.value ? "bg-select" : ""}`}
+                            className={`m-0 p-2 text-sm cursor-pointer w-full ${selected?.value === opt.value ? "bg-select" : ""}`}
                         >
                             {opt.label}
                         </button>
