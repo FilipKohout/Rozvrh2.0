@@ -39,9 +39,6 @@ export default function TimetableOptions() {
     return (
         <div className="flex items-center justify-center">
             <div className="flex h-10 gap-2 invisibleScrollbar overflow-x-scroll mb-2">
-                <button className="m-0 w-10 p-2 flex items-center text-nowrap">
-                    <span className="material-symbols-outlined mr-1 h-[22px]">star</span>
-                </button>
                 <Link to={location.origin} className="no-underline">
                     <button className="m-0 flex items-center text-nowrap">
                         <span className="material-symbols-outlined mr-1 h-[22px]">swap_vert</span>
